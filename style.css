@@ -6,7 +6,7 @@ body {
 .link {
   font-weight: 500;
   color: #646cff;
-  text-decoration: inherit;
+  text-decoration: none;
   padding: 0px 3px;
   border-radius: 6px;
   background-color: #ffffff;
@@ -14,7 +14,7 @@ body {
 
 .linkSobre {
   font-weight: 500;
-  text-decoration: inherit;
+  text-decoration: none;
   padding: 0px 3px;
   border-radius: 6px;
   background-color: rgb(38, 38, 38);
