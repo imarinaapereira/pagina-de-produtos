@@ -17,10 +17,16 @@ body {
   text-decoration: inherit;
   padding: 0px 3px;
   border-radius: 6px;
+  background-color: rgb(38, 38, 38);
 }
 
 .link:hover {
   border: 0.1rem solid #646cff;
+
+}
+
+.linkSobre:hover {
+  border: 0.1rem solid black;
 
 }
 
