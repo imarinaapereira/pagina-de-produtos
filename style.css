@@ -12,6 +12,13 @@ body {
   background-color: #ffffff;
 }
 
+.linkSobre {
+  font-weight: 500;
+  text-decoration: inherit;
+  padding: 0px 3px;
+  border-radius: 6px;
+}
+
 .link:hover {
   border: 0.1rem solid #646cff;
 
