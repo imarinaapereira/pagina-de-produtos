@@ -25,9 +25,11 @@ header {
   display: flex;
   justify-content: space-between;
   margin-top: 0.01rem;
+  margin-bottom: 0.5rem;
 }
 
 nav {
+  margin-bottom: 1rem;
   justify-content: space-between;
   padding: 0rem 0rem 1rem 0rem;
   display: flex;
