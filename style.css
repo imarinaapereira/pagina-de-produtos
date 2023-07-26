@@ -159,7 +159,7 @@ button:hover {
 
 }
 
-@media(max-width:425px) {
+@media(max-width:750px) {
   .Inicial div {
     width: 50%;
   }
