@@ -159,31 +159,6 @@ button:hover {
 
 }
 
-@media(max-width:430px) {
-  .Inicial div {
-    width: 50%;
-  }
-
-  .Inicial div img {
-    width: 10rem;
-    height: 13rem;
-  }
-}
-
-.link {
-  padding: 1rem;
-}
-
-ul li {
-  list-style: none;
-}
-
-.promocoes {
-  padding: 0 2.5rem;
-}
-
-
-
 .gradient-text {
   display: flex;
   justify-content: center;
@@ -199,4 +174,31 @@ ul li {
   margin-top: 4rem;
   max-width: 85%;
 
+}
+
+@media(max-width:430px) {
+  .Inicial div {
+    width: 50%;
+  }
+
+  .Inicial div img {
+    width: 10rem;
+    height: 13rem;
+  }
+
+  .gradient-text {
+    font-size: 1.5rem;
+  }
+}
+
+.link {
+  padding: 1rem;
+}
+
+ul li {
+  list-style: none;
+}
+
+.promocoes {
+  padding: 0 2.5rem;
 }
