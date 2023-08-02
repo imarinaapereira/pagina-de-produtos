@@ -145,28 +145,54 @@ imgs.forEach((i) => {
 
 
   const checks = checkboxRoupa.classList.add('check')
+  const compra = []
 
-  function mostrarVlInput() {
-    alert(`Você adicionou um produto de ${checkboxRoupa.value}R$ a sua compra`)
-  }
-  checkboxRoupa.addEventListener('click', mostrarVlInput)
   tudo.appendChild(h2)
   tudo.appendChild(img)
   tudo.appendChild(p)
   tudo.appendChild(checkboxRoupa)
+
   imgsInc.appendChild(tudo);
 
 })
 
+const compra = [];
 
-const comprar = document.querySelector('.comprar')
-comprar.addEventListener('click', function Comprar() {
+function mostrarVlInput() {
   const dataAtual = new Date();
   const tresDiasEmMilissegundos = 3 * 24 * 60 * 60 * 1000; // 3 dias em milissegundos
 
   const dataAposTresDias = new Date(dataAtual.getTime() + tresDiasEmMilissegundos);
   const data = dataAposTresDias.toDateString();
 
-  alert(`sua compra foi feita com sucesso, a entrega será feita no dia ${data} `)
+  const checkboxes = document.querySelectorAll(".check");
+  let valorTotal = 0;
 
-})
+  checkboxes.forEach(checkbox => {
+    if (checkbox.checked) {
+      const valorProduto = parseFloat(checkbox.value);
+      valorTotal += valorProduto;
+      compra.push(valorProduto);
+    }
+  });
+
+  if (valorTotal > 0) {
+    alert(`Esse é o valor total R$ da sua compra ${valorTotal}`);
+    const parcelar = prompt("Você deseja parcelar esse valor? Sim/Não");
+
+    if (parcelar.toLowerCase() === "sim") {
+      const numeroDeParcelas = Number(prompt("Em quantas vezes você deseja parcelar?"));
+      const valorDaParcela = valorTotal / numeroDeParcelas;
+      alert(`Você pagará ${numeroDeParcelas} parcelas de ${valorDaParcela.toFixed(2)}R$`);
+    }
+
+    alert(`Sua compra foi feita com sucesso, a entrega será feita no dia ${data}`);
+  } else {
+    alert("Selecione pelo menos um produto antes de finalizar a compra.");
+  }
+  console.log(compra)
+}
+
+const comprar = document.querySelector('.comprar');
+comprar.addEventListener('click', mostrarVlInput);
+

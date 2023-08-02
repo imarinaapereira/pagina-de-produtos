@@ -1,14 +1,4 @@
-const comprar = document.querySelector('.comprar')
-comprar.addEventListener('click', function Comprar() {
-  const dataAtual = new Date();
-  const tresDiasEmMilissegundos = 3 * 24 * 60 * 60 * 1000; // 3 dias em milissegundos
 
-  const dataAposTresDias = new Date(dataAtual.getTime() + tresDiasEmMilissegundos);
-  const data = dataAposTresDias.toDateString();
-
-  alert(`sua compra foi feita com sucesso, a entrega será feita no dia ${data} `)
-
-})
 
 const acessórios = document.querySelector('.acessorios')
 const acessórioImg = document.querySelector('acessorios img')
@@ -71,18 +61,64 @@ const acessorios = [{
 
 
 
+
 acessorios.forEach((acessorio) => {
   const h2 = document.createElement('h2')
   h2.textContent = acessorio.nome
   acessórios.appendChild(h2)
   const img = document.createElement('img')
+  img.classList.add("imgs")
   img.src = acessorio.img
   acessórios.appendChild(img)
   const p = document.createElement('p')
   p.textContent = acessorio.valor
   acessórios.appendChild(p)
   const checkbox = document.createElement('input');
-  checkbox.type = 'checkbox'; // Set the input type to 'checkbox' for creating a checklist
+  checkbox.type = 'checkbox';
+  checkbox.value = parseFloat(p.textContent)
+
+  checkbox.classList.add("checkAcessorios") // Set the input type to 'checkbox' for creating a checklist
   acessórios.appendChild(checkbox);
 })
+
+
+const compra = [];
+
+function mostrarVlInput() {
+  const dataAtual = new Date();
+  const tresDiasEmMilissegundos = 3 * 24 * 60 * 60 * 1000; // 3 dias em milissegundos
+
+  const dataAposTresDias = new Date(dataAtual.getTime() + tresDiasEmMilissegundos);
+  const data = dataAposTresDias.toDateString();
+
+  const checkboxesAcs = document.querySelectorAll(".checkAcessorios");
+  let valorTotal = 0;
+
+  checkboxesAcs.forEach(checkbox => {
+    if (checkbox.checked) {
+      const valorProduto = parseFloat(checkbox.value);
+      valorTotal += valorProduto;
+      compra.push(valorProduto);
+    }
+  });
+
+  if (valorTotal > 0) {
+    alert(`Esse é o valor total R$ da sua compra ${valorTotal}`);
+    const parcelar = prompt("Você deseja parcelar esse valor? Sim/Não");
+
+    if (parcelar.toLowerCase() === "sim") {
+      const numeroDeParcelas = Number(prompt("Em quantas vezes você deseja parcelar?"));
+      const valorDaParcela = valorTotal / numeroDeParcelas;
+      alert(`Você pagará ${numeroDeParcelas} parcelas de ${valorDaParcela.toFixed(2)}R$`);
+    }
+
+    alert(`Sua compra foi feita com sucesso, a entrega será feita no dia ${data}`);
+  } else {
+    alert("Selecione pelo menos um produto antes de finalizar a compra.");
+  }
+  console.log(compra)
+}
+
+const comprar = document.querySelector(".comprarAcessorios");
+comprar.addEventListener('click', mostrarVlInput);
 

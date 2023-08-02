@@ -1,14 +1,4 @@
-const comprar = document.querySelector('.comprar')
-comprar.addEventListener('click', function Comprar() {
-  const dataAtual = new Date();
-  const tresDiasEmMilissegundos = 3 * 24 * 60 * 60 * 1000; // 3 dias em milissegundos
 
-  const dataAposTresDias = new Date(dataAtual.getTime() + tresDiasEmMilissegundos);
-  const data = dataAposTresDias.toDateString();
-
-  alert(`sua compra foi feita com sucesso, a entrega será feita no dia ${data} `)
-
-})
 
 const roupas = [{
   id: "1",
@@ -73,12 +63,55 @@ roupas.forEach((r) => {
   const imgRoupa = document.createElement('img');
   imgRoupa.src = r.img;
   Divroupas.appendChild(imgRoupa);
-
+  imgRoupa.classList.add("imgs")
   const pRoupa = document.createElement('p');
   pRoupa.textContent = r.valor;
   Divroupas.appendChild(pRoupa);
 
   const checkboxRoupa = document.createElement('input');
   checkboxRoupa.type = 'checkbox';
+  checkboxRoupa.value = parseFloat(pRoupa.textContent)
+
   Divroupas.appendChild(checkboxRoupa);
 })
+
+const compra = [];
+
+function mostrarVlInput() {
+  const dataAtual = new Date();
+  const tresDiasEmMilissegundos = 3 * 24 * 60 * 60 * 1000; // 3 dias em milissegundos
+
+  const dataAposTresDias = new Date(dataAtual.getTime() + tresDiasEmMilissegundos);
+  const data = dataAposTresDias.toDateString();
+
+  const checkboxesAcs = document.querySelectorAll("input[type='checkbox'");
+  let valorTotal = 0;
+
+  checkboxesAcs.forEach(checkbox => {
+    if (checkbox.checked) {
+      const valorProduto = parseFloat(checkbox.value);
+      valorTotal += valorProduto;
+      compra.push(valorProduto);
+    }
+  });
+
+  if (valorTotal > 0) {
+    alert(`Esse é o valor total R$ da sua compra ${valorTotal}`);
+    const parcelar = prompt("Você deseja parcelar esse valor? Sim/Não");
+
+    if (parcelar.toLowerCase() === "sim") {
+      const numeroDeParcelas = Number(prompt("Em quantas vezes você deseja parcelar?"));
+      const valorDaParcela = valorTotal / numeroDeParcelas;
+      alert(`Você pagará ${numeroDeParcelas} parcelas de ${valorDaParcela.toFixed(2)}R$`);
+    }
+
+    alert(`Sua compra foi feita com sucesso, a entrega será feita no dia ${data}`);
+  } else {
+    alert("Selecione pelo menos um produto antes de finalizar a compra.");
+  }
+  console.log(compra)
+}
+
+const comprar = document.querySelector(".comprar");
+comprar.addEventListener('click', mostrarVlInput);
+
