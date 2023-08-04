@@ -159,40 +159,33 @@ imgs.forEach((i) => {
 const compra = [];
 
 function mostrarVlInput() {
-  const dataAtual = new Date();
-  const tresDiasEmMilissegundos = 3 * 24 * 60 * 60 * 1000; // 3 dias em milissegundos
-
-  const dataAposTresDias = new Date(dataAtual.getTime() + tresDiasEmMilissegundos);
-  const data = dataAposTresDias.toDateString();
-
-  const checkboxes = document.querySelectorAll(".check");
-  let valorTotal = 0;
-
-  checkboxes.forEach(checkbox => {
+  const data = new Date();
+  data.setDate(data.getDate() + 3).toString()
+  const tresdiasDepois = new Date(data)
+  let valorTotal = 0
+  const checkboxes = document.querySelectorAll("input[type=checkbox]")
+  checkboxes.forEach((checkbox) => {
     if (checkbox.checked) {
-      const valorProduto = parseFloat(checkbox.value);
-      valorTotal += valorProduto;
-      compra.push(valorProduto);
+      let valorProduto = parseFloat(checkbox.value)
+      valorTotal += valorProduto
+      compra.push(valorProduto)
     }
-  });
+  })
 
   if (valorTotal > 0) {
-    alert(`Esse é o valor total R$ da sua compra ${valorTotal}`);
-    const parcelar = prompt("Você deseja parcelar esse valor? Sim/Não");
-
-    if (parcelar.toLowerCase() === "sim") {
-      const numeroDeParcelas = Number(prompt("Em quantas vezes você deseja parcelar?"));
-      const valorDaParcela = valorTotal / numeroDeParcelas;
-      alert(`Você pagará ${numeroDeParcelas} parcelas de ${valorDaParcela.toFixed(2)}R$`);
+    alert(`Esse é o valor total da sua compra ${valorTotal}R$`)
+    const parcelar = prompt(`Você deseja parcelar esse valor?sim/não`).toUpperCase()
+    if (parcelar == 'sim'.toUpperCase()) {
+      const numeroDeParcelas = Number(prompt(`Você deseja parcelar em quantas vezes?`))
+      const valorDaParcela = valorTotal / numeroDeParcelas
+      alert(`Você pagará ${numeroDeParcelas} parcelas de ${valorDaParcela.toFixed(2)}`)
     }
-
-    alert(`Sua compra foi feita com sucesso, a entrega será feita no dia ${data}`);
+    alert(`Sua compra foi feita com sucesso, a entrega será feita no dia ${tresdiasDepois.toDateString()}`);
   } else {
     alert("Selecione pelo menos um produto antes de finalizar a compra.");
   }
   console.log(compra)
 }
-
 const comprar = document.querySelector('.comprar');
 comprar.addEventListener('click', mostrarVlInput);
 
